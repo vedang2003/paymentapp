@@ -21,6 +21,7 @@ export const Dashboard = () => {
           }
         );
         setBalance(response.data.balance);
+        localStorage.setItem("name", `${response.data.firstname} ${response.data.lastname}`);
       } catch (error) {
         console.error("Error fetching balance:", error.response.data);
         setBalance(0);
