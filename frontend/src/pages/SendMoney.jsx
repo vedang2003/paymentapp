@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import config from "../config";
 
 export const SendMoney = () => {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ export const SendMoney = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/account/transfer",
+        `${config.API_URL}/account/transfer`,
         {
           to: id,
           amount,

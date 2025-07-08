@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdError } from "react-icons/md";
 import axios from "axios";
+import config from "../config";
 
 export const Signin = () => {
   // State variables to hold form data
@@ -13,13 +14,10 @@ export const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signin",
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${config.API_URL}/user/signin`, {
+        username,
+        password,
+      });
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {

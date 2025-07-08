@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from "../config";
 
 export const Signup = () => {
   // State variables to hold form data
@@ -17,15 +18,12 @@ export const Signup = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signup",
-        {
-          firstName,
-          lastName,
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${config.API_URL}/user/signup`, {
+        firstName,
+        lastName,
+        username,
+        password,
+      });
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {

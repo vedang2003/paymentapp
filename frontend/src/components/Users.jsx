@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
+import config from "../config";
 
 export const Users = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsers = setTimeout(async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/user/bulk?filter=" + filter
+          `${config.API_URL}/user/bulk?filter=${filter}`
         );
         setUsers(response.data.users);
       } catch (error) {
-        console.error("Error fetching balance:", error.response.data);
+        console.error("Error fetching users", error.response.data);
         setUsers([]);
       }
-    };
-    fetchUsers();
+    }, 300);
+    return () => clearTimeout(fetchUsers);
   }, [filter]);
 
   return (
@@ -61,7 +62,7 @@ const User = ({ user }) => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            navigate('/send', {state: { user }})
+            navigate("/send", { state: { user } });
           }}
           className="cursor-pointer w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         >
