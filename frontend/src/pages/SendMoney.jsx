@@ -10,14 +10,18 @@ export const SendMoney = () => {
   const navigate = useNavigate();
 
   const { user } = location.state || {};
-  const id = user._id;
-  const name = user.firstName;
   useEffect(() => {
     if (!user) {
       navigate("/dashboard");
     }
   }, [user, navigate]);
 
+  if ( !user){
+    return null;
+  }
+  const id = user._id;
+  const name = user.firstName;
+ 
   const handleTransfer = async (e) => {
     e.preventDefault();
     try {
