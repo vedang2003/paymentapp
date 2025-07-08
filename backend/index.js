@@ -4,7 +4,11 @@ const mainRouter = require("./routes/index");
 const app = express();
 
 // Middlewares for routing, cors and JSON parsing
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
+  })
+);
 app.use(express.json());
 app.use("/api/v1", mainRouter);
 
