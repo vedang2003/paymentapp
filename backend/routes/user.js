@@ -21,7 +21,6 @@ router.post("/signup", async (req, res) => {
     });
   }
 
-  console.log("Received signup request:", req.body);
   const { username, firstName, lastName, password } = req.body;
   const existingUser = await User.findOne({ username });
   if (existingUser) {

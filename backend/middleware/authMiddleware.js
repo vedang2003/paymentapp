@@ -19,7 +19,7 @@ function authMiddleware(req, res, next) {
       res.status(403).json({ message: "You are not authenticated" });
     }
   } catch (error) {
-    res.status(403).json({ message: "You are not authenticated"});
+    res.status(403).json({ message: "You are not authenticated" });
   }
 }
 

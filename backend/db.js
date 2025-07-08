@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // Connect to MongoDB
-mongoose.connect(
-    "mongodb+srv://vedangc03:CTGuKDYapj3iADlH@cluster0.vnimdtb.mongodb.net/paytm"
-);
+mongoose
+  .connect(
+    process.env.MONGODB_URI
+  )
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => console.log(err));
 
 // Schema of users table
 const userSchema = new mongoose.Schema({
