@@ -36,8 +36,8 @@ export const Users = () => {
         />
       </div>
       <div className="flex flex-col gap-3">
-        {users.map((user, index) => (
-          <User key={index} user={user} />
+        {users.map((user) => (
+          <User key={user._id} user={user} />
         ))}
       </div>
     </div>

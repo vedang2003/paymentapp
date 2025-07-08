@@ -9,12 +9,13 @@ export const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!firstName || !lastName || !username || !password) {
-      alert("All fields are required.");
+      setError("All fields are required.");
       return;
     }
     try {
@@ -27,7 +28,7 @@ export const Signup = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {
-      alert(
+      setError(
         error.response?.data?.message ||
           "An unexpected error occurred. Please try again later."
       );
@@ -41,6 +42,14 @@ export const Signup = () => {
         <div className="text-gray-500 font-medium text-center py-2">
           Enter your information to create an account
         </div>
+        {error && (
+          <div className="w-full rounded-lg bg-red-100 p-2 my-2">
+            <div className=" text-red-500 font-medium tex-sm flex items-center justify-center">
+              <span className="font-bold px-1">Error:</span>
+              {error}
+            </div>
+          </div>
+        )}
         <div className="flex flex-col items-start w-full px-2 py-1">
           <div className="font-semibold py-2">First Name</div>
           <input
